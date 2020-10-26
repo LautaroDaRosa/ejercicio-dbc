@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections;
+using System.Linq;
 
 namespace Full_GRASP_And_SOLID
 {
@@ -17,6 +18,10 @@ namespace Full_GRASP_And_SOLID
 
         public void AddStep(Step step)
         {
+            if(step==null)
+                {
+                    throw new NullReferenceException("Paso vacio");
+                }
             this.steps.Add(step);
         }
 
@@ -30,15 +35,14 @@ namespace Full_GRASP_And_SOLID
             Console.WriteLine($"Receta de {this.FinalProduct.Description}:");
             foreach (Step step in this.steps)
             {
-                try
+                // precondicion
+                if(step==null)
                 {
-                    Console.WriteLine($"{step.Quantity} de '{step.Input.Description}' " +
+                    throw new NullReferenceException("Paso vacio");
+                }
+                Console.WriteLine($"{step.Quantity} de '{step.Input.Description}' " +
                     $"usando '{step.Equipment.Description}' durante {step.Time}");
-                }
-                catch
-                {
-                    Console.WriteLine("Error al imprimir el paso, el paso está vacío.");
-                }
+                // postcondicion vacia
             }
         }
     }
