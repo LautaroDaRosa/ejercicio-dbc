@@ -3,6 +3,12 @@
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 //---------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------
+
+using System;
+using System.Collections;
+using System.Linq;
+
 
 namespace Full_GRASP_And_SOLID
 {
@@ -10,9 +16,20 @@ namespace Full_GRASP_And_SOLID
     {
         public Product(string description, double unitCost)
         {
-            this.Description = description;
-            this.UnitCost = unitCost;
+
+            if (string.IsNullOrEmpty(description))
+        {
+            throw new ArgumentNullException("description invalida");
         }
+        this.Description=description;
+
+        if (double.IsNormal(unitCost))
+        {
+            throw new ArgumentNullException("unitCost invalido");
+        }
+        this.UnitCost=unitCost;
+
+       }
 
         public string Description { get; set; }
 
