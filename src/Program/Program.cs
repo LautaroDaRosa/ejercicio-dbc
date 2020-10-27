@@ -28,7 +28,7 @@ namespace Full_GRASP_And_SOLID
                 recipe.AddStep(null);
                 recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
             }
-            catch
+            catch(NullReferenceException)
             {
                 Console.WriteLine("Error al añadir el paso, el paso está vacío.");
             }
