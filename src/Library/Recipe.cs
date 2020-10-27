@@ -8,6 +8,7 @@ using System;
 using System.Collections;
 using System.Linq;
 
+
 namespace Full_GRASP_And_SOLID
 {
     public class Recipe
@@ -15,19 +16,58 @@ namespace Full_GRASP_And_SOLID
         private ArrayList steps = new ArrayList();
 
         public Product FinalProduct { get; set; }
-
+        
         public void AddStep(Step step)
         {
+            int cantStepIni= steps.Count;
+            //precondicones
             if(step==null)
-                {
-                    throw new NullReferenceException("Paso vacio");
-                }
+            {
+                throw new NullReferenceException("Step vacio");
+            }
+            
+            
+            //precondiciones
+               if (this.steps.Contains(step))
+            {
+               throw new ArgumentException("El step ya existe.");
+            } 
+
             this.steps.Add(step);
+
+            //poscondiciones
+            if(!this.steps.Contains(step))
+            {
+                throw new NullReferenceException("No se agrego step");
+            }
         }
 
         public void RemoveStep(Step step)
         {
+
+            int cantStepIni= steps.Count;
+            //precondicones
+            if(step==null)
+            {
+                throw new ArgumentNullException("Step vacio");
+            }
+         
+
+            //precondicion
+
+            if (!this.steps.Contains(step))
+            {
+               throw new ArgumentException("El step no existe.");
+            } 
+
             this.steps.Remove(step);
+            //poscondiciones
+            if(this.steps.Contains(step))
+            {
+                throw new NullReferenceException("No se eliminó correctamente el step");
+            }
+         
+        
         }
 
         public void PrintRecipe()
